@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Cadastro de Campeonato</title>
+    <h:outputStylesheet name="styles.css"/>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Cadastro de Campeonato" styleClass="custom-panel">
+            <h:panelGrid columns="2" styleClass="custom-panelGrid">
+                <h:outputLabel for="nome" value="Nome:"/>
+                <p:inputText id="nome" value="#{campeonatoBean.campeonato.nome}" required="true" requiredMessage="O nome é obrigatório."/>
+            </h:panelGrid>
+
+            <p:commandButton value="Salvar" action="#{campeonatoBean.salvar}" update="@form"/>
+            <p:link value="Voltar" outcome="index.xhtml" style="margin:10px"/>
+            <h:messages globalOnly="true" style="margin-top:10px"/>
+
+            
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

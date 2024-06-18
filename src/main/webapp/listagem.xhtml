@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Listagem de Jogos</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Listagem de Jogos">
+            <p:dataTable var="jogo" value="#{jogoBean.listaJogos}" paginator="true" rows="10" emptyMessage="Nenhum jogo encontrado.">
+                <!-- Colunas existentes -->
+                <p:column headerText="ID">
+                    <h:outputText value="#{jogo.id}" />
+                </p:column>
+                <p:column headerText="Data Cadastro">
+                    <h:outputText value="#{jogo.dataCadastro}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Data Partida">
+                    <h:outputText value="#{jogo.dataPartida}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Time 1">
+                    <h:outputText value="#{jogo.time1}" />
+                </p:column>
+                <p:column headerText="Time 2">
+                    <h:outputText value="#{jogo.time2}" />
+                </p:column>
+                <p:column headerText="Gols Time 1">
+                    <h:outputText value="#{jogo.golsTime1}" />
+                </p:column>
+                <p:column headerText="Gols Time 2">
+                    <h:outputText value="#{jogo.golsTime2}" />
+                </p:column>
+                <p:column headerText="Campeonato">
+                    <h:outputText value="#{jogo.campeonato.nome}" />
+                </p:column>
+                <p:column headerText="Editar">
+                    <p:commandButton value="Editar" />
+                </p:column>
+            </p:dataTable>
+            <!-- Botão de Resumo -->
+            <p:commandButton value="Resumo" actionListener="#{jogoBean.calcularResumo}" update=":resumoDialog" oncomplete="PF('resumoDialog').show()" />
+
+            <!-- Link para redirecionar para a página de cadastro -->
+            <p:link value="Cadastrar Novo Jogo" outcome="index.xhtml" />
+        </p:panel>
+    </h:form>
+
+    <!-- Diálogo para exibir o resumo -->
+    <p:dialog header="Resumo do Campeonato" widgetVar="resumoDialog" modal="true" showEffect="fade" hideEffect="fade">
+        <h:form id="resumoDialog">
+            <p:dataTable var="time" value="#{jogoBean.listaTimes}">
+                <p:column headerText="Time">
+                    <h:outputText value="#{time.nome}" />
+                </p:column>
+                <p:column headerText="Pontuação">
+                    <h:outputText value="#{time.pontuacao}" />
+                </p:column>
+                <p:column headerText="Vitórias">
+                    <h:outputText value="#{time.vitorias}" />
+                </p:column>
+                <p:column headerText="Derrotas">
+                    <h:outputText value="#{time.derrotas}" />
+                </p:column>
+                <p:column headerText="Empates">
+                    <h:outputText value="#{time.empates}" />
+                </p:column>
+                <p:column headerText="Gols Marcados">
+                    <h:outputText value="#{time.golsMarcados}" />
+                </p:column>
+                <p:column headerText="Gols Sofridos">
+                    <h:outputText value="#{time.golsSofridos}" />
+                </p:column>
+                <p:column headerText="Saldo de Gols">
+                    <h:outputText value="#{time.saldoDeGols}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

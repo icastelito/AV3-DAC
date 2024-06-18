@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Cadastro de Jogo</title>
+    <h:outputStylesheet name="styles.css"/>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Cadastro de Jogo">
+            <p:messages globalOnly="true" autoUpdate="true"/>
+
+            <p:panelGrid columns="2" columnClasses="label,value" style="margin-bottom:10px;">
+                <p:outputLabel value="Time 1:" for="time1"/>
+                <p:inputText id="time1" value="#{jogoBean.jogo.time1}" required="true" />
+
+                <p:outputLabel value="Time 2:" for="time2"/>
+                <p:inputText id="time2" value="#{jogoBean.jogo.time2}" required="true" />
+
+                <p:outputLabel value="Gols Time 1:" for="golsTime1"/>
+                <p:inputText id="golsTime1" value="#{jogoBean.jogo.golsTime1}" required="true" />
+
+                <p:outputLabel value="Gols Time 2:" for="golsTime2"/>
+                <p:inputText id="golsTime2" value="#{jogoBean.jogo.golsTime2}" required="true" />
+                
+                <p:outputLabel value="Data da Partida:" for="dataPartida"/>
+                <p:calendar id="dataPartida" value="#{jogoBean.jogo.dataPartida}" required="true" pattern="dd/MM/yyyy" showOn="button"/>
+
+                <p:outputLabel value="Campeonato:" for="campeonato"/>
+                <p:selectOneMenu id="campeonato" value="#{jogoBean.campeonatoId}" required="true">
+                    <f:selectItem itemLabel="-- Selecione um campeonato --" noSelectionOption="true" />
+                    <f:selectItems value="#{jogoBean.listaCampeonatos}" var="campeonato" itemValue="#{campeonato.id}" itemLabel="#{campeonato.id} - #{campeonato.nome}" />
+                </p:selectOneMenu>
+            </p:panelGrid>
+
+            <p:commandButton value="Salvar" action="#{jogoBean.salvar}" update="@form"/>
+            <p:link value="Listar Jogos" outcome="listagem.xhtml" style="margin:10px"/>
+            <p:link value="Cadastrar Campeonato" outcome="cadastro_campeonato.xhtml" style="margin:10px"/>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
