@@ -39,9 +39,10 @@
                 </p:selectOneMenu>
             </p:panelGrid>
 
-            <p:commandButton value="Salvar" action="#{jogoBean.salvar}" update="@form"/>
+            <p:commandButton value="Salvar" action="#{jogoBean.salvar}" update="@form" oncomplete="location.reload()"/>
             <p:link value="Listar Jogos" outcome="listagem.xhtml" style="margin:10px"/>
             <p:link value="Cadastrar Campeonato" outcome="cadastro_campeonato.xhtml" style="margin:10px"/>
+            <p:link value="Filtragem" outcome="listagem.xhtml" style="margin:10px"/>
         </p:panel>
     </h:form>
 </h:body>

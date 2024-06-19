@@ -6,10 +6,14 @@ import util.JPAUtil;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+
+
 import java.util.List;
+
 
 public class CampeonatoDAO {
 
+		
     public void salvar(Campeonato campeonato) {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction transaction = em.getTransaction();

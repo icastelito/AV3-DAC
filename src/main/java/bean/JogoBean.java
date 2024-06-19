@@ -152,4 +152,25 @@ public class JogoBean {
 
         timesMap.put(nomeTime, time);
     }
+    
+    public void excluir(Jogo jogo) {
+        if (jogo == null || jogo.getId() == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Jogo não encontrado."));
+            return;
+        }
+
+        JogoDAO jogoDAO = new JogoDAO();
+        try {
+            jogoDAO.excluir(jogo.getId());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Jogo excluído com sucesso."));
+            listaJogos = null; // Reseta a lista de jogos para recarregar
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao excluir o jogo."));
+            e.printStackTrace();
+        }
+
+        // Reseta os campos do formulário
+        this.jogo = new Jogo();
+    }
+
 }

@@ -6,9 +6,11 @@ import util.JPAUtil;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+
 import java.util.List;
 
 public class JogoDAO {
+	
 
     private EntityManager getEntityManager() {
         return JPAUtil.getEntityManager();
@@ -74,6 +76,22 @@ public class JogoDAO {
         } finally {
             em.close();
         }
+    }
+    public List<Jogo> listarJogosPorTime(Long idTime) {
+        EntityManager em = getEntityManager();
+        List<Jogo> jogos = null;
+
+        try {
+            TypedQuery<Jogo> query = em.createNamedQuery("Jogo.findByTime", Jogo.class);
+            query.setParameter("idTime", idTime);
+            jogos = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+
+        return jogos;
     }
 
     public void excluir(Long id) {

@@ -2,12 +2,14 @@ package entidades;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
+@NamedQuery(name = "Jogo.findByTime",
+            query = "SELECT j FROM Jogo j WHERE j.time1.id = :idTime OR j.time2.id = :idTime")
+
 public class Jogo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
@@ -34,11 +36,11 @@ public class Jogo {
     private Integer golsTime2;
 
     // Getters e Setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
